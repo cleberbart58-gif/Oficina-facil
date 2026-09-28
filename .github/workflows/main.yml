@@ -50,10 +50,10 @@ jobs:
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew bundleDebug
+          ./gradlew assembleDebug
 
       - name: Enviar Apk
         uses: actions/upload-artifact@v4
         with:
           name: Oficina-Facil-Apk
-          path: android/app/build/outputs/bundle/debug/app-debug.aab
+          path: android/app/build/outputs/apk/debug/app-debug.apk
