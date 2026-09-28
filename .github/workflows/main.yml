@@ -27,7 +27,8 @@ jobs:
 
       - name: Instalar dependências
         run: npm install
-
+      - name: Instalar TypeScript
+        run: npm install -D typescript
       - name: Criar pasta www
         run: |
           mkdir -p www
