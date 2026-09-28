@@ -32,7 +32,7 @@ jobs:
         run: npm install @capacitor/android
 
       - name: Criar projeto Android
-        run: npx cap add android
+      npx --yes @capacitor/cli add android
 
       - name: Sincronizar Capacitor
         run: npx cap sync android
