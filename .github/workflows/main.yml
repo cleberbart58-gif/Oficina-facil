@@ -45,11 +45,11 @@ jobs:
       - name: Sincronizar Capacitor
         run: npx cap sync android
 
-      - name: Gerar AAB
-  working-directory: android
-  run: |
-    chmod +x gradlew
-    ./gradlew bundleDebug
+          - name: Gerar AAB
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew bundleDebug
 
       - name: Enviar AAB
         uses: actions/upload-artifact@v4
