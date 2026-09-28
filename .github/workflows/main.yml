@@ -46,14 +46,14 @@ jobs:
       - name: Sincronizar Capacitor
         run: npx cap sync android
 
-      - name: Gerar AAB
+      - name: Gerar Apk
         working-directory: android
         run: |
           chmod +x gradlew
           ./gradlew bundleDebug
 
-      - name: Enviar AAB
+      - name: Enviar Apk
         uses: actions/upload-artifact@v4
         with:
-          name: Oficina-Facil-AAB
+          name: Oficina-Facil-Apk
           path: android/app/build/outputs/bundle/debug/app-debug.aab
