@@ -1,39 +1,49 @@
-# Oficina Fácil + Mecânico Perto — edição comercial
+# Oficina Fácil — pacote Android pronto para GitHub Actions
 
-Este pacote é a base de produção do aplicativo. Ele funciona em modo demonstração imediatamente e pode ser ligado ao Supabase para contas reais e dados online.
+Este ZIP contém o aplicativo web/PWA e toda a configuração necessária para o GitHub Actions criar o projeto Android e gerar um arquivo AAB.
 
-## 1. Banco online
-1. Crie um projeto no Supabase.
-2. Abra SQL Editor e execute `supabase/schema.sql`.
-3. Copie a URL e a chave `anon` do projeto.
-4. Edite `config.js`:
-   - `SUPABASE_URL: '...'`
-   - `SUPABASE_ANON_KEY: '...'`
-   - `DEMO_MODE: false`
+## Como gerar o AAB
 
-## 2. Publicação
-Pode ser hospedado como site/PWA em Vercel, Netlify, Cloudflare Pages ou servidor próprio. A pasta é estática; não precisa de Node para a primeira publicação.
+1. Envie **todos os arquivos e pastas deste ZIP** para a raiz do repositório GitHub `cleberbart58-gif/Oficina-facil`.
+2. Abra **Actions**.
+3. Selecione **Build Android AAB**.
+4. Toque em **Run workflow** e confirme na branch `main`.
+5. Quando terminar, abra a execução concluída e baixe o artefato **oficina-facil-aab**.
 
-## 3. Recursos já estruturados
-- autenticação de oficina/motorista;
-- perfis e permissões por usuário (RLS);
-- clientes e veículos;
-- orçamentos;
-- agendamentos;
-- cadastro público de oficinas;
-- avaliações;
-- integração de contato via WhatsApp;
-- PWA instalável;
-- base para planos pagos.
+O workflow instala as dependências, cria automaticamente a pasta `android/`, sincroniza `www/` e gera `app-debug.aab`. Portanto, a pasta `android/` não precisa estar dentro deste ZIP.
 
-## 4. Próximas integrações de produção
-- Mercado Pago para assinatura Premium;
-- geolocalização + mapa real;
-- push notifications;
-- upload de fotos/documentos;
-- painel administrativo;
-- publicação Google Play/App Store;
-- termos, privacidade, LGPD e política de cancelamento;
-- domínio e e-mail transacional.
+## O que foi conferido
 
-Nunca coloque chaves secretas do servidor no navegador. A chave `anon` do Supabase é própria para o cliente quando RLS está configurado corretamente.
+- `package.json` válido.
+- Capacitor 8 configurado.
+- Node 22 configurado no GitHub Actions.
+- Java 21 configurado no GitHub Actions.
+- `npx cap add android` configurado.
+- `npx cap sync android` configurado.
+- Geração de AAB com `bundleDebug` configurada.
+- Verificação automática de que o AAB realmente existe antes do upload.
+- Arquivos JavaScript sem erro de sintaxe detectável.
+- `manifest.json` e `package.json` válidos.
+- Arquivos HTML principais presentes.
+
+## Importante sobre o AAB
+
+O arquivo gerado é um **AAB de debug**, adequado para validar o aplicativo e o processo de build. Para publicar na Google Play, ainda será necessário configurar a assinatura de produção e os dados da publicação.
+
+## Configuração do aplicativo
+
+O identificador Android é `br.com.oficinafacil.app` e o nome do aplicativo é **Oficina Fácil**.
+
+A interface web fica em `www/`.
+
+## Dados online
+
+O aplicativo abre em modo demonstração por padrão. A integração real com Supabase depende da configuração do banco e das políticas RLS.
+
+Os campos de configuração ficam em `www/config.js`:
+
+- `SUPABASE_URL`
+- `SUPABASE_ANON_KEY`
+- `DEMO_MODE`
+
+Nunca coloque chaves secretas de servidor no navegador.
